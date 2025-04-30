@@ -6,7 +6,13 @@ def gaussian_elimination(matrix, b, file):
     scale = [max(map(abs, row)) for row in matrix]  # make an array of scaling factors
     indices = list(range(n))  # Row indices
 
-    file.write(f"Matrix size: {n}x{n}\n\n")  # Write matrix size as a header
+    # Write the header to the file
+    file.write(f"Matrix size: {n}x{n}\n")
+    file.write("Original Matrix and Vector:\n")
+    for i in range(n):
+        row = " ".join(f"{matrix[i][j]:10.3f}" for j in range(n)) + f" | {b[i]:10.3f}\n"
+        file.write(row)
+    file.write("\n")
 
     for k in range(n - 1):
         # Scaled partial pivoting
@@ -40,6 +46,8 @@ def gaussian_elimination(matrix, b, file):
 
 def main():
     with open("intermediate_steps.txt", "w") as file:  # Open file in main
+        file.write("Sawyer Theis SC Project 3\n\n")
+
         # Use a 3x3 matrix and vector for testing
         matrix = [
             [2, -5, 1],
